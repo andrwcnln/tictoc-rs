@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use clap::Parser;
 use std::process::Command;
 use std::time::Instant;
@@ -12,12 +13,17 @@ struct Cli {
     args: Vec<String>,
 }
 
-fn main() {
-    let args = Cli::parse();
+fn main() -> Result<()> {
+    let input = Cli::parse();
+
     let time = Instant::now();
-    Command::new(args.command).args(args.args).status().unwrap();
-    //let time = Instant::now();
-    //let _result = child.wait().unwrap();
-    let elap = time.elapsed().as_secs_f64();
-    println!("time elapsed {}", elap)
+
+    Command::new(&input.command)
+        .args(input.args)
+        .status()
+        .with_context(|| format!("Could not execute command `{}`", input.command))?;
+
+    let elapsed_time = time.elapsed().as_secs_f64();
+    println!("time elapsed {}", elapsed_time);
+    Ok(())
 }
