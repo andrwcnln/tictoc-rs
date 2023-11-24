@@ -1,3 +1,6 @@
+![A logo with the word tictoc](./.docs/logoLightMode.png#gh-light-mode-only)
+![A logo with the word tictoc](./.docs/logoDarkMode.png#gh-dark-mode-only)
+
 # Time any command.
 
 ![badge](https://github.com/andrwcnln/tictoc/actions/workflows/rust.yml/badge.svg)
